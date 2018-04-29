@@ -18,7 +18,7 @@ window.onload = function(){
 				var newCell = document.createElement("input");
 				newCell.type = "text";
 				newCell.className = "cellCol";
-				newCell.setAttribute("position", j + "-" + i);
+				newCell.id = j + "-" + i;
 				setAttribute("contenteditable", "false");
 				newCell.width='75px';
 				newCell.height='10px';
@@ -26,9 +26,12 @@ window.onload = function(){
 				newCell.addEventListener("focus", function(event){
 					selectCell(event);
 					cellPosition(event);
-				});
+				},true);
 				newCell.addEventListener("blur", function(event){
 					unSelectCell(event);
+				},true);
+				newCell.addEventListener("keydown", function(event){
+					moveSelectCell(event);
 				},true);
 				newRow.appendChild(newCell);
 			}
@@ -51,6 +54,47 @@ window.onload = function(){
 		position[0] = row;
 		position[1] = column;
 		return position;
+	}
+	function moveSelectCell(event){
+		var position = cellPosition(event);
+		var row = position[0];
+		var column = position[1];
+		if (event.keyCode == '38') {
+        // up arrow
+			var newRow = row - 1;
+			var newColumn = column;
+			if(document.getElementById(newRow + "-" + newColumn) == null){
+				newRow = row;
+			};
+			document.getElementById(newRow + "-" + newColumn).focus();
+		}
+		else if (event.keyCode == '40') {
+			// down arrow
+			var newRow = row + 1;
+			var newColumn = column;
+			if(document.getElementById(newRow + "-" + newColumn) == null){
+				newRow = row;
+			};
+			document.getElementById(newRow + "-" + newColumn).focus();
+		}
+		else if (event.keyCode == '37') {
+		   // left arrow
+			var newRow = row;
+			var newColumn = column - 1;
+			if(document.getElementById(newRow + "-" + newColumn) == null){
+				newColumn = column;
+			};
+			document.getElementById(newRow + "-" + newColumn).focus();
+		}
+		else if (event.keyCode == '39') {
+		   // right arrow
+		    var newRow = row;
+			var newColumn = column + 1;
+			if(document.getElementById(newRow + "-" + newColumn) == null){
+				newColumn = column;
+			};
+			document.getElementById(newRow + "-" + newColumn).focus();
+		}
 	}
 }
 

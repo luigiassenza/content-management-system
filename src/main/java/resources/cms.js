@@ -28,7 +28,7 @@ window.onload = function(){
 	};
 	document.getElementById("save-button").onclick = function(){
 		getHTML();
-		save();		
+		save();		ajax();
 	};
 	document.getElementById("cancel-button").onclick = function(){
 		cancel();		
@@ -45,6 +45,22 @@ window.onload = function(){
 		}
 		document.getElementById("output").innerHTML = lines;
 	}
-
+	ajax();
+	function ajax(){
+		var url = "storage.txt";
+		var http = new XMLHttpRequest();
+		http.open("POST", url, true);
+		http.setRequestHeader('Content-Type', 'text/plain; charset=ISO-8859-1');
+		
+		http.onreadystatechange = function(){
+			if(http.readyState == 4 && http.status == 200) {
+				console.log(http.responseText);
+				
+			}
+		}
+		//http.open("GET", "storage.txt", true);
+		http.send("data");
+		console.log(http);
+	}
 };
 
