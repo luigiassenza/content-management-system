@@ -1,8 +1,31 @@
-#container {
+#editable-container {
 	min-height: 50%;
 }
 
 .edit-container {
 	border: solid;
-	background:lightsteelblue;
+	background: lightsteelblue;
+}
+
+#upper-container {
+    border: solid;
+    border-color: black;
+    outline: dotted green;
+    background: yellow;
+}
+
+#left-container {
+    float: left;
+    display: inline-block;
+    width: 20%;
+    height: 90%;
+    border: solid;
+}
+
+#central-container {
+    float: left;
+    display: inline-block;
+    width: 79%;
+    height: 90%;
+    border: solid;
 }
